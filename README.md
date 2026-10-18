@@ -24,14 +24,14 @@ The production server serves the built client and API from port 3001. Set `PORT`
 
 ## Deploy to Render
 
-The [`render.yaml`](./render.yaml) blueprint builds the React app, starts the API and static site in one Node service, configures `/api/health` as its health check, and mounts a persistent disk for SQLite.
+The [`render.yaml`](./render.yaml) blueprint builds the React app and starts the API and static site in one free Node service. It configures `/api/health` as its health check and stores SQLite at `/tmp/analytics.sqlite`.
 
 1. Push this project to a GitHub repository.
 2. In Render, choose **New → Blueprint**, connect that repository, and apply the `render.yaml` configuration.
 3. Wait for the deploy to finish, then open the `.onrender.com` URL shown for the service.
 4. Test a menu order, open Analytics, and confirm the dashboard updates.
 
-The blueprint uses a paid Render instance because persistent disks are not available on the free web-service tier. Keep a single instance: a SQLite database on a persistent disk is not suitable for multiple app instances. Render must be able to use Node 22.13 or newer for the built-in SQLite module.
+This free setup uses SQLite without a persistent disk. The app works normally, but event and order data can be erased when the service sleeps, restarts, or redeploys; use it as a live demo, not as durable analytics storage. Free web services may also sleep when idle, so the first request after inactivity can take longer. If durable data becomes a requirement, keep SQLite and attach paid persistent storage, or migrate to a managed database. Render must be able to use Node 22.13 or newer for the built-in SQLite module.
 
 ## Try the complete flow
 
