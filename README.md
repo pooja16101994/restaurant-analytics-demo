@@ -24,7 +24,7 @@ The production server serves the built client and API from port 3001. Set `PORT`
 
 ## Deploy to Render
 
-The [`render.yaml`](./render.yaml) blueprint builds the React app and starts the API and static site in one free Node service. It configures `/api/health` as its health check and stores SQLite at `/tmp/analytics.sqlite`.
+The [`render.yaml`](./render.yaml) blueprint installs build-time dependencies, builds the React app, and starts the API and static site in one free Node service. It configures `/api/health` as its health check and stores SQLite at `/tmp/analytics.sqlite`.
 
 1. Push this project to a GitHub repository.
 2. In Render, choose **New → Blueprint**, connect that repository, and apply the `render.yaml` configuration.
